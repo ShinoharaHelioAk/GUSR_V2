@@ -25,6 +25,7 @@ public class ControllerServlet extends HttpServlet {
 		String nomeDaClasse = "br.com.helio.mvc.logica." + parametro;
 		
 		try {
+			@SuppressWarnings("rawtypes")
 			Class classe = Class.forName(nomeDaClasse);
 			
 			Logica logica = (Logica) classe.newInstance();

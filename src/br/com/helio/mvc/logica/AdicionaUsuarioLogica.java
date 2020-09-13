@@ -17,6 +17,11 @@ public class AdicionaUsuarioLogica implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		boolean usuarioNaoEstaLogado = (request.getSession().getAttribute("usuarioLogado") == null);
+		if (usuarioNaoEstaLogado) {
+			return "login.jsp";
+		}
+		
 		PrintWriter out = response.getWriter();
 		
 		String nome = request.getParameter("nome");

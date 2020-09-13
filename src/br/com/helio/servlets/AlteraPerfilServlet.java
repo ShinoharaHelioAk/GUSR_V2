@@ -24,6 +24,12 @@ public class AlteraPerfilServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		boolean usuarioNaoEstaLogado = (req.getSession().getAttribute("usuarioLogado") == null);
+		if (usuarioNaoEstaLogado) {
+			resp.sendRedirect("login.jsp");
+			return;
+		}
+		
 		Long id = Long.parseLong(req.getParameter("id"));
 		String perfil = req.getParameter("perfil");
 		

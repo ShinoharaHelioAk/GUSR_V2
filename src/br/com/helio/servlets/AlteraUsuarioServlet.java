@@ -23,6 +23,12 @@ public class AlteraUsuarioServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		boolean usuarioNaoEstaLogado = (req.getSession().getAttribute("usuarioLogado") == null);
+		if (usuarioNaoEstaLogado) {
+			resp.sendRedirect("login.jsp");
+			return;
+		}
+		
 		PrintWriter out = resp.getWriter();
 		
 		String id = req.getParameter("id");

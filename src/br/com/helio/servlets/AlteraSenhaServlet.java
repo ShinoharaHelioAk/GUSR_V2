@@ -24,6 +24,12 @@ public class AlteraSenhaServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		boolean usuarioNaoEstaLogado = (req.getSession().getAttribute("usuarioLogado") == null);
+		if (usuarioNaoEstaLogado) {
+			resp.sendRedirect("login.jsp");
+			return;
+		}
+		
 		if (getServletContext().getAttribute("erroSenhaAtual") != null) {
 			System.out.println("Mensagem de erro encontrada na sessão. Removendo...");
 			getServletContext().removeAttribute("erroSenhaAtual");

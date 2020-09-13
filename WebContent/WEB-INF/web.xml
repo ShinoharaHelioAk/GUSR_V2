@@ -14,6 +14,6 @@
   	<location>/paginaErro.html</location>
   </error-page>
   <session-config>
-  	<session-timeout>1</session-timeout>
+  	<session-timeout>5</session-timeout>
   </session-config>
 </web-app>

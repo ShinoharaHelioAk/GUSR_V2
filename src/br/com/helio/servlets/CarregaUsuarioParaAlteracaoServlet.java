@@ -20,6 +20,12 @@ public class CarregaUsuarioParaAlteracaoServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		boolean usuarioNaoEstaLogado = (req.getSession().getAttribute("usuarioLogado") == null);
+		if (usuarioNaoEstaLogado) {
+			resp.sendRedirect("login.jsp");
+			return;
+		}
+		
 		String idRequestParam = req.getParameter("id");
 		//System.out.println(idRequestParam);
 		Long id = Long.parseLong(idRequestParam);
@@ -63,11 +69,18 @@ public class CarregaUsuarioParaAlteracaoServlet extends HttpServlet {
 			
 			// Conteúdo do arquivo "cabecalho.jsp"
 			out.println("<h3>SGUSR_V2 - Sistema de Gerenciamento de Usuários</h3>");
-			if (getServletContext().getAttribute("usuarioLogado").toString() != null &&
-					! getServletContext().getAttribute("usuarioLogado").toString().isEmpty()) {
-				out.println("<b>Usuário Logado: </b>" + getServletContext().getAttribute("usuarioLogado").toString());
+			if (req.getSession().getAttribute("usuarioLogado").toString() != null &&
+					! req.getSession().getAttribute("usuarioLogado").toString().isEmpty()) {
+				Usuario usuarioLogado = (Usuario) req.getSession().getAttribute("usuarioLogado");
+				String nomeUsuarioLogado = usuarioLogado.getNome();
+				out.println("<b>Usuário Logado: </b>" + nomeUsuarioLogado);
 				out.println("<a href=\"validaLogout\">Sair</a>");
 			}
+//			if (getServletContext().getAttribute("usuarioLogado").toString() != null &&
+//					! getServletContext().getAttribute("usuarioLogado").toString().isEmpty()) {
+//				out.println("<b>Usuário Logado: </b>" + getServletContext().getAttribute("usuarioLogado").toString());
+//				out.println("<a href=\"validaLogout\">Sair</a>");
+//			}
 			out.println("<hr color=\"#000000\" />");
 			
 			out.println("<h3>Página de Alteração de Usuários</h3>");

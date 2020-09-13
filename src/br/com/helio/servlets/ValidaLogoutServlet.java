@@ -15,7 +15,9 @@ public class ValidaLogoutServlet extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		getServletContext().removeAttribute("usuarioLogado");
+		//getServletContext().removeAttribute("usuarioLogado");
+		//req.getSession().removeAttribute("usuarioLogado");
+		req.getSession().invalidate();
 		RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
 		rd.forward(req, resp);
 	}

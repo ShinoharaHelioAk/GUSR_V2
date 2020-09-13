@@ -12,6 +12,11 @@ public class RemoveUsuarioLogica implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		boolean usuarioNaoEstaLogado = (request.getSession().getAttribute("usuarioLogado") == null);
+		if (usuarioNaoEstaLogado) {
+			return "login.jsp";
+		}
+		
 		System.out.println("Buscando os dados do Usuário pelo ID...");
 		Long id = Long.parseLong(request.getParameter("id"));
 		Usuario usuario = new Usuario();

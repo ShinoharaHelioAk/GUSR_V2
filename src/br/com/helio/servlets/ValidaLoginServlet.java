@@ -62,7 +62,9 @@ public class ValidaLoginServlet extends HttpServlet {
 			getServletContext().setAttribute("usrNFnd", "usuario_nao_encontrado");
 			requestDispatcher = "/login.jsp";
 		} else {
-			getServletContext().setAttribute("usuarioLogado", usuarioLogado.getNome());
+			//getServletContext().setAttribute("usuarioLogado", usuarioLogado.getNome());
+			HttpSession session = req.getSession();
+			session.setAttribute("usuarioLogado", usuarioLogado);
 			requestDispatcher = "/index.jsp";
 		}
 		//System.out.println("linha 65: " + getServletContext().getAttribute("usrNFnd"));

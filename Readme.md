@@ -25,6 +25,7 @@ Não foi utilizada nenhuma tecnologia do lado cliente para estilização das tel
 	* **(Observação: No MySQL, você deve criar um schema para criar a tabela)**
 
 ```SQL
+USE <SCHEMA_NAME>;
 CREATE TABLE usuarios (
     id BIGINT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
@@ -37,6 +38,31 @@ CREATE TABLE usuarios (
     senha VARCHAR(500) NOT NULL,
     perfil VARCHAR(500),
     primary key (id)
+);
+```
+* Inserir um usuário com perfil de administrador para fazer o login na aplicação, usando o comando SQL abaixo como exemplo:
+```SQL
+USE <SCHEMA_NAME>;
+INSERT INTO usuarios (
+	`nome`,
+	`email`,
+	`dataNascimento`,
+	`status`,
+	`dataInclusao`,
+	`dataModificacao`,
+	`motivoAlteracao`,
+	`senha`,
+	`perfil`
+) VALUES (
+	'usuario',
+	'usuario@user.com.br',
+	now(),
+	'bloqueado',
+	now(),
+	null,
+	null,
+	'12345',
+	'administrador'
 );
 ```
 
